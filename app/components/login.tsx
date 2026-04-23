@@ -41,7 +41,7 @@ function authenticateUser(username: string, password: string): boolean {
     }).then(response => {
         if(response.status === 200){
             response.json().then(data => {
-                localStorage.setItem('token', data.token)
+                localStorage.setItem('token', data.access_token)
             })
         }
         else{

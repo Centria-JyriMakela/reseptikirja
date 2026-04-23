@@ -1,5 +1,6 @@
 import Login from "./login";
 import Logout from "./logout";
+import {useEffect} from "react";
 export default function Header(){
     return(
         <header>
@@ -19,6 +20,11 @@ function Navbar(){
     )
 }
 function NavBarItem(component: any, isLoggedIn: boolean){
+    const [token, setToken] = useEffect(() =>{
+        
+    });
+
+
     if(localStorage.getItem('token')){
         if(isLoggedIn){
             return component;
