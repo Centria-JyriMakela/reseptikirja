@@ -1,3 +1,4 @@
+"use client";
 export default function Profile(){
     return (
         <ProfilePage />
@@ -6,7 +7,8 @@ export default function Profile(){
 
 function ProfilePage(){
     let userData: any;
-    userData = JSON.parse(atob(localStorage.getItem('token') || '')).split('.')[1];
+
+    userData = JSON.parse(atob(localStorage.getItem('token')?.split('.')[1] || ''));
 
     return (
         <div>

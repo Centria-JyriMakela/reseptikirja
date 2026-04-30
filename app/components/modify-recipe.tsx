@@ -1,3 +1,4 @@
+"use client";
 export default function ModifyRecipe(){
     return (
         <ModifyRecipePage />
@@ -6,12 +7,12 @@ export default function ModifyRecipe(){
 
 function ModifyRecipePage(){
     let handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
-        event.preventDefault;
+        event.preventDefault();
         let formData = new FormData(event.currentTarget);
         let name = formData.get('name') as string;
         let ingredients = formData.get('ingredients') as string;
         let instructions = formData.get('instructions') as string;
-        let id = JSON.parse(atob(localStorage.getItem('token') || '').split('.')[1]).user_id;
+        let id = JSON.parse(atob(localStorage.getItem('token')?.split('.')[1] || '')).user_id;
         fetch('http://localhost:8000/recipes/add', {
             method: 'POST',
             headers:{
@@ -22,7 +23,7 @@ function ModifyRecipePage(){
         })
         .then(response => {
             if(response.status === 200){
-                window.location.href = '/recipes';
+                //window.location.href = '/recipes';
             }
             else{
                 alert('Reseptin lisääminen epäonnistui');

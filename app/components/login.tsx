@@ -1,3 +1,4 @@
+"use client";
 export default function Login(){
     return(
         <LoginForm />
@@ -11,7 +12,7 @@ function LoginForm(){
         let username = formData.get('username') as string;
         let password = formData.get('password') as string;
         if(authenticateUser(username, password)){
-            window.location.href = '/profile';
+            //window.location.href = '/profile';
         }
         else{
             alert('Väärä käyttäjätunnus tai salasana');
@@ -35,9 +36,9 @@ function authenticateUser(username: string, password: string): boolean {
     fetch('http://localhost:8000/login',{
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: JSON.stringify({ "username": username, "password": password})
+        body: new URLSearchParams({ "username": username, "password": password })
     }).then(response => {
         if(response.status === 200){
             response.json().then(data => {

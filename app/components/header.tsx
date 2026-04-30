@@ -1,6 +1,7 @@
+"use client";
 import Login from "./login";
 import Logout from "./logout";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 export default function Header(){
     return(
         <header>
@@ -20,12 +21,15 @@ function Navbar(){
     )
 }
 function NavBarItem(component: any, isLoggedIn: boolean){
-    const [token, setToken] = useEffect(() =>{
-        
+    const [token, setToken] = useState<string | null>(null);
+
+    useEffect(() =>{
+        const tempToken = localStorage.getItem('token');
+        setToken(tempToken);
     });
 
 
-    if(localStorage.getItem('token')){
+    if(token){
         if(isLoggedIn){
             return component;
         }
